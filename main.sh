@@ -1,4 +1,4 @@
-#thee ips are ignored, gets yesterdays lof entries from access_log in cpanel
+#these ips are ignored, gets yesterdays lof entries from access_log in cpanel
 cat /usr/local/cpanel/logs/access_log | grep -v "^1\.1\.1\.1" | grep -v "^127\.0\.0\.1" | awk -v d="$(date -d 'yesterday' +'%m/%d/%Y')" '$0 ~ d' |awk '{for (i=1;i<=NF;i++) if ($i~/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/) print $i}' | sort -u > temp_ips.txt
 
 # Download the list of Cloudflare IP ranges
